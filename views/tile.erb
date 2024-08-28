@@ -1,0 +1,18 @@
+<button
+    id="<%= tile.x %>_<%= tile.y %>"
+    type="button"
+    <%= "disabled" if tile.is_revealed %>
+    class="shadow-md h-8 w-8 m-0 border-[0.5px] border-slate-200 hover:bg-gray-500 active:bg-gray-300
+            <%= 'text-red-500' if tile.is_revealed && tile.has_mine %>
+            <%= 'text-slate-200' if tile.is_revealed && !tile.has_mine %>
+        "
+    hx-target="#game"
+    hx-swap="innerHTML"
+    hx-post="/game/<%= id %>/reveal?x=<%= tile.x %>&y=<%= tile.y %>"
+>
+    <% if tile.is_revealed && tile.has_mine %>
+        x
+    <% elsif tile.is_revealed %>
+        <%= tile.mines_around %>
+    <% end %>
+</button>

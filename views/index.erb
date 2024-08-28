@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-slate-600 min-h-screen flex flex-col gap-4 items-center justify-center">
+        <button 
+            type="button" 
+            class="px-4 py-2 rounded-md text-slate-200 hover:bg-slate-500"
+            hx-get="/"
+            hx-target="#game"
+        >
+            New Game
+        </button>
+        <div id="game" class="flex flex-col gap-1">
+            <% (0..9).each do |x|%>
+                <div class="flex gap-1">
+                    <% (0..9).each do |y|%>
+                        <button
+                            id="<%= x %>_<%= y %>"
+                            type="button" 
+                            class="shadow-md h-8 w-8 m-0 border-[0.5px] border-slate-300 hover:bg-gray-500 active:bg-gray-300"
+                            hx-target="#game"
+                            hx-post="/game/<%= id %>/reveal?x=<%= x %>&y=<%= y %>">
+                        </button>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </body>
+</html>

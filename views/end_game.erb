@@ -1,0 +1,7 @@
+<% game.tiles.each do |row| %>
+    <div class="flex gap-1">
+    <% row.each do |tile| %>
+        <%= erb :tile, locals: { id: game.id, tile: tile } %>
+    <% end %>
+    </div>
+<% end %>
